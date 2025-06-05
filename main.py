@@ -1,5 +1,5 @@
 from __future__ import annotations
-import os, random, time, logging, asyncio, threading, json
+import os, time, logging, asyncio, threading, json
 from collections import deque
 from dataclasses import dataclass
 from datetime import datetime
@@ -14,6 +14,8 @@ from tensorflow import keras
 from sklearn.preprocessing import StandardScaler
 from scipy import signal
 from scipy.io import loadmat
+import secrets
+
 try:
     import mne
     import pyedflib
@@ -23,7 +25,7 @@ except ImportError:
     warnings.warn("MNE or pyedflib not available. Install with: pip install mne pyedflib")
 
 def set_global_seed(seed: int = 42):
-    random.seed(seed)
+    secrets.SystemRandom().seed(seed)
     np.random.seed(seed)
     tf.keras.utils.set_random_seed(seed)
 
